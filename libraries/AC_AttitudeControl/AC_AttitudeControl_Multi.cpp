@@ -407,6 +407,20 @@ void AC_AttitudeControl_Multi::rate_controller_run()
     _pd_scale = VECTORF_111;
 
     control_monitor_update();
+
+ 
+    //Defined variable to send RATE for simulation SITL
+    float RATE[4];
+
+    // Assign data to structure instance
+    RATE[0]  = _motors.get_roll();
+    RATE[1]  = _motors.get_pitch();
+    RATE[2]  = _motors.get_yaw();
+    RATE[3]  = _motors.get_throttle();
+
+    // Send data through UDP connection ("172.29.192.1" = address of MATLAB instance)
+    sock.sendto(&RATE, sizeof(RATE),"172.29.192.1",9002);
+
 }
 
 // sanity check parameters.  should be called once before takeoff
