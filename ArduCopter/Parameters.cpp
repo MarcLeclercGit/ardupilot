@@ -251,7 +251,7 @@ const AP_Param::Info Copter::var_info[] = {
     // @Param: FLTMODE1
     // @DisplayName: Flight Mode 1
     // @Description: Flight mode when pwm of Flightmode channel(FLTMODE_CH) is <= 1230
-    // @Values: 0:Stabilize,1:Acro,2:AltHold,3:Auto,4:Guided,5:Loiter,6:RTL,7:Circle,9:Land,11:Drift,13:Sport,14:Flip,15:AutoTune,16:PosHold,17:Brake,18:Throw,19:Avoid_ADSB,20:Guided_NoGPS,21:Smart_RTL,22:FlowHold,23:Follow,24:ZigZag,25:SystemID,26:Heli_Autorotate,27:Auto RTL
+    // @Values: 0:Stabilize,1:Acro,2:AltHold,3:Auto,4:Guided,5:Loiter,6:RTL,7:Circle,9:Land,11:Drift,13:Sport,14:Flip,15:AutoTune,16:PosHold,17:Brake,18:Throw,19:Avoid_ADSB,20:Guided_NoGPS,21:Smart_RTL,22:FlowHold,23:Follow,24:ZigZag,25:SystemID,26:Heli_Autorotate,27:Auto RTL,28:Turtle,29:SystemID2
     // @User: Standard
     GSCALAR(flight_mode1, "FLTMODE1",               (uint8_t)FLIGHT_MODE_1),
 
@@ -932,6 +932,12 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     AP_SUBGROUPPTR(mode_systemid_ptr, "SID", 34, ParametersG2, ModeSystemId),
 #endif
 
+#if MODE_SYSTEMID2_ENABLED == ENABLED
+    // @Group: SID
+    // @Path: mode_systemid2.cpp
+    AP_SUBGROUPPTR(mode_systemid2_ptr, "SID2", 63, ParametersG2, ModeSystemId2),
+#endif
+
     // @Param: FS_VIBE_ENABLE
     // @DisplayName: Vibration Failsafe enable
     // @Description: This enables the vibration failsafe which will use modified altitude estimation and control during high vibrations
@@ -1264,6 +1270,11 @@ ParametersG2::ParametersG2(void)
 #if MODE_SYSTEMID_ENABLED == ENABLED
     ,mode_systemid_ptr(&copter.mode_systemid)
 #endif
+
+#if MODE_SYSTEMID2_ENABLED == ENABLED
+    ,mode_systemid2_ptr(&copter.mode_systemid2)
+#endif
+
 #if MODE_AUTOROTATE_ENABLED == ENABLED
     ,arot()
 #endif

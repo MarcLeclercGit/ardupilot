@@ -242,6 +242,12 @@
 #endif
 
 //////////////////////////////////////////////////////////////////////////////
+// System ID2 - conduct system identification with altitude hold tests on vehicle
+#ifndef MODE_SYSTEMID2_ENABLED
+# define MODE_SYSTEMID2_ENABLED ENABLED
+#endif
+
+//////////////////////////////////////////////////////////////////////////////
 // Throw - fly vehicle after throwing it in the air
 #ifndef MODE_THROW_ENABLED
 # define MODE_THROW_ENABLED ENABLED

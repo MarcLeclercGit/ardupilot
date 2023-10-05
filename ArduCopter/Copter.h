@@ -234,6 +234,7 @@ public:
     friend class ModeZigZag;
     friend class ModeAutorotate;
     friend class ModeTurtle;
+    friend class ModeSystemId2;
 
     Copter(void);
 
@@ -1019,6 +1020,10 @@ private:
 #if MODE_SYSTEMID_ENABLED == ENABLED
     ModeSystemId mode_systemid;
 #endif
+#if MODE_SYSTEMID2_ENABLED == ENABLED
+    ModeSystemId2 mode_systemid2;
+#endif
+
 #if HAL_ADSB_ENABLED
     ModeAvoidADSB mode_avoid_adsb;
 #endif
