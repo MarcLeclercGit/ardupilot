@@ -932,11 +932,6 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     AP_SUBGROUPPTR(mode_systemid_ptr, "SID", 34, ParametersG2, ModeSystemId),
 #endif
 
-#if MODE_SYSTEMID2_ENABLED == ENABLED
-    // @Group: SID
-    // @Path: mode_systemid2.cpp
-    AP_SUBGROUPPTR(mode_systemid2_ptr, "SID2", 63, ParametersG2, ModeSystemId2),
-#endif
 
     // @Param: FS_VIBE_ENABLE
     // @DisplayName: Vibration Failsafe enable
@@ -1231,6 +1226,12 @@ const AP_Param::GroupInfo ParametersG2::var_info2[] = {
     // @Range: 0 10000
     // @User: Standard
     AP_GROUPINFO("TKOFF_RPM_MAX", 7, ParametersG2, takeoff_rpm_max, 0),
+#endif
+
+#if MODE_SYSTEMID2_ENABLED == ENABLED
+    // @Group: SID
+    // @Path: mode_systemid2.cpp
+    AP_SUBGROUPPTR(mode_systemid2_ptr, "SID", 8, ParametersG2, ModeSystemId2),
 #endif
 
     // ID 62 is reserved for the AP_SUBGROUPEXTENSION

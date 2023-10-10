@@ -442,7 +442,7 @@ public:
 
     void set_magnitude(float input) { waveform_magnitude.set(input); }
 
-    static const struct AP_Param::GroupInfo var_info[];
+    static const struct AP_Param::GroupInfo var_info2[];
 
     Chirp chirp_input;
 

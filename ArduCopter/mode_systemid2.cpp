@@ -6,7 +6,7 @@
  * Init and run calls for systemId2, flight mode
  */
 
-const AP_Param::GroupInfo ModeSystemId2::var_info[] = {
+const AP_Param::GroupInfo ModeSystemId2::var_info2[] = {
 
     // @Param: _AXIS
     // @DisplayName: System identification axis
@@ -66,7 +66,7 @@ const AP_Param::GroupInfo ModeSystemId2::var_info[] = {
 
 ModeSystemId2::ModeSystemId2(void) : Mode()
 {
-    AP_Param::setup_object_defaults(this, var_info);
+    AP_Param::setup_object_defaults(this, var_info2);
 }
 
 #define SYSTEM_ID_DELAY     1.0f      // time in seconds waited after system id mode change for frequency sweep injection
