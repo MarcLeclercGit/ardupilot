@@ -1228,11 +1228,11 @@ const AP_Param::GroupInfo ParametersG2::var_info2[] = {
     AP_GROUPINFO("TKOFF_RPM_MAX", 7, ParametersG2, takeoff_rpm_max, 0),
 #endif
 
-#if MODE_SYSTEMID2_ENABLED == ENABLED
+//#if MODE_SYSTEMID2_ENABLED == ENABLED
     // @Group: SID
     // @Path: mode_systemid2.cpp
-    AP_SUBGROUPPTR(mode_systemid2_ptr, "SID", 8, ParametersG2, ModeSystemId2),
-#endif
+//    AP_SUBGROUPPTR(mode_systemid2_ptr, "SID", 8, ParametersG2, ModeSystemId2),
+//#endif
 
     // ID 62 is reserved for the AP_SUBGROUPEXTENSION
 
