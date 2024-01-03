@@ -244,6 +244,9 @@ public:
     // Set z-axis system identification angular velocity in degrees/s
     void rate_bf_yaw_sysid(float rate) { _sysid_ang_vel_body.z = rate; }
 
+    // Set x-axis system identification for disturbance in rad
+    void roll_dist_sysid(float dist) {_sysid_dist_body.x = dist; }
+
     // Set x-axis system identification actuator
     void actuator_roll_sysid(float command) { _actuator_sysid.x = command; }
 
@@ -487,6 +490,15 @@ protected:
     // attitude controller by the System Identification Mode.
     // It is reset to zero immediately after it is used.
     Vector3f            _sysid_ang_vel_body;
+
+    // This is the angle in radians in the body frame, added to the measured output
+    // in attitude controller by the System Identification Mode for disturbance response.
+    // It is reset to zero immediately after it is used.
+    Vector3f            _sysid_dist_body;
+
+    // This represents a quaternion rotation in NED frame to the target (setpoint)
+    // attitude used in the attitude controller.
+    Quaternion          _attitude_dist;
 
     // This is the unitless value added to the output of the PID by the System Identification Mode.
     // It is reset to zero immediately after it is used.

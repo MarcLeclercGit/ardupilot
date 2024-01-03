@@ -12,7 +12,7 @@ const AP_Param::GroupInfo ModeSystemId::var_info[] = {
     // @DisplayName: System identification axis
     // @Description: Controls which axis are being excited.  Set to non-zero to see more parameters
     // @User: Standard
-    // @Values: 0:None, 1:Input Roll Angle, 2:Input Pitch Angle, 3:Input Yaw Angle, 4:Recovery Roll Angle, 5:Recovery Pitch Angle, 6:Recovery Yaw Angle, 7:Rate Roll, 8:Rate Pitch, 9:Rate Yaw, 10:Mixer Roll, 11:Mixer Pitch, 12:Mixer Yaw, 13:Mixer Thrust
+    // @Values: 0:None, 1:Input Roll Angle, 2:Input Pitch Angle, 3:Input Yaw Angle, 4:Recovery Roll Angle, 5:Recovery Pitch Angle, 6:Recovery Yaw Angle, 7:Rate Roll, 8:Rate Pitch, 9:Rate Yaw, 10:Mixer Roll, 11:Mixer Pitch, 12:Mixer Yaw, 13:Mixer Thrust, 14: Disturbamce Roll
     AP_GROUPINFO_FLAGS("_AXIS", 1, ModeSystemId, axis, 0, AP_PARAM_FLAG_ENABLE),
 
     // @Param: _MAGNITUDE
@@ -253,11 +253,14 @@ void ModeSystemId::run()
                 case AxisType::MIX_THROTTLE:
                     pilot_throttle_scaled += waveform_sample;
                     break;
+                case AxisType::DIST_ROLL:
+                    attitude_control->roll_dist_sysid(radians(waveform_sample));
+                    break;    
             }
             break;
     }
 
-    // call attitude controller
+    // call attitude controller for target sweep
     attitude_control->input_euler_angle_roll_pitch_euler_rate_yaw(target_roll, target_pitch, target_yaw_rate);
 
     // output pilot's throttle

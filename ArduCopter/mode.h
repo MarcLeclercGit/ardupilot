@@ -1652,6 +1652,7 @@ private:
         MIX_PITCH = 11,     // mixer pitch axis is being excited
         MIX_YAW = 12,       // mixer pitch axis is being excited
         MIX_THROTTLE = 13,  // mixer throttle axis is being excited
+        DIST_ROLL = 14,     // disturbance roll axis is being excited
     };
 
     AP_Int8 axis;               // Controls which axis are being excited. Set to non-zero to display other parameters

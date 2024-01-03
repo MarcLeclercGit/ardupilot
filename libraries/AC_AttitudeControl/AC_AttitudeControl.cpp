@@ -711,9 +711,17 @@ void AC_AttitudeControl::attitude_controller_run_quat()
     Quaternion attitude_body;
     _ahrs.get_quat_body_to_ned(attitude_body);
 
+    Quaternion att_dist;
+    att_dist.from_euler(_sysid_dist_body.x,0.0f,0.0f);
+     
+    Quaternion attitude_body_dist;
+    attitude_body_dist = att_dist * attitude_body;
+    attitude_body_dist.normalize();
+
     // This vector represents the angular error to rotate the thrust vector using x and y and heading using z
     Vector3f attitude_error;
-    thrust_heading_rotation_angles(_attitude_target, attitude_body, attitude_error, _thrust_angle, _thrust_error_angle);
+    //thrust_heading_rotation_angles(_attitude_target, attitude_body, attitude_error, _thrust_angle, _thrust_error_angle);
+    thrust_heading_rotation_angles(_attitude_target, attitude_body_dist, attitude_error, _thrust_angle, _thrust_error_angle);
 
     // Compute the angular velocity corrections in the body frame from the attitude error
     _ang_vel_body = update_ang_vel_target_from_att_error(attitude_error);
@@ -753,6 +761,8 @@ void AC_AttitudeControl::attitude_controller_run_quat()
 
     // Record error to handle EKF resets
     _attitude_ang_error = attitude_body.inverse() * _attitude_target;
+
+    _sysid_dist_body.zero();
 }
 
 // thrust_heading_rotation_angles - calculates two ordered rotations to move the attitude_body quaternion to the attitude_target quaternion.
